@@ -1,9 +1,10 @@
 import * as types from '../constants/reverse.const';
 
-export default function ReverseApp(state = null, action ) {
-  switch(action.type){
+export default (state = '', action ) => {
+  switch(action.type) {
     case types.STRING:
-      return state = state.reverse();
+      return action.payload;
+    default:
+      return state;
   }
-  return state;
 }

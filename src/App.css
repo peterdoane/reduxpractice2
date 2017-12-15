@@ -26,3 +26,12 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.inputElement {
+  width: 300px;
+  margin: 0 auto;
+}
+
+.inputWrapper {
+  margin: 20px auto;
+}

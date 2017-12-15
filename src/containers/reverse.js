@@ -2,32 +2,35 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/reverse.actions.js';
+import '../App.css';
 
 class Reverse extends React.Component {
+
   constructor(props) {
     super(props);
+    this.handleChange = this.handleChange.bind(this);
   }
-  handleKeyPress = (event) => {
-    if(event.key == 'Enter'){
-      console.log('enter');
-    }
+
+  handleChange(e) {
+    this.props.reverse(e.target.value);
   }
+
   render() {
-    const { reverse } = this.props;
+    const { string } = this.props;
     return(
-      <div>
-        <input onKeyPress={this.handleKeyPress} />
+      <div className="inputWrapper">
+        <h1>{string}</h1>
+        <input
+          className="inputElement"
+          onChange={this.handleChange}
+        />
       </div>
     )
   }
 }
 
-
-
-function mapStateToProps(state) {
-  return {
-    count: state
-  };
+function mapStateToProps({ string }) {
+  return { string };
 }
 
 function mapDispatchToProps(dispatch) {
