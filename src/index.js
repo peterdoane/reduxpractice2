@@ -1,27 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+
 import Reverse from './containers/reverse';
-import ReverseApp from './reducers/reverse.reducer';
-const store = createStore(ReverseApp);
+import rootReducer from './reducers/index';
 
+const createStoreWithMiddleware = applyMiddleware()(createStore);
+const store = createStoreWithMiddleware(rootReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
-class New extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return (
-      <Provider store={store}>
-        <Reverse />
-      </Provider>
-    )
-  }
-}
-// 
-ReactDOM.render(<New/>, document.getElementById('root'));
-registerServiceWorker();
+ReactDOM.render(
+  <Provider store={store}>
+    <Reverse />
+  </Provider>
+, document.getElementById('root'));
